@@ -22,9 +22,7 @@ async function main() {
         }
     }
 
-    let subscriptionTx = web3.eth.subscribe('pendingTransactions', (error, hash) =>{
-        getAccTx(error, hash)
-    })
+    let subscriptionTx = web3.eth.subscribe('pendingTransactions', getAccTx)
 
     .on("connected", function(subscriptionId) {
         console.log('connected: ', subscriptionId);
