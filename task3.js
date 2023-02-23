@@ -48,6 +48,7 @@ async function main() {
     const event2 = web3.utils.sha3("SetData(uint256,string,uin256[])"); 
 
     myContract.events.Receive({
+        filter: {sender: account2.address},
         topics: [event1]
     })
     .on("data", function(logs){
@@ -57,6 +58,7 @@ async function main() {
     })
     
     myContract.events.SetData({
+        filter: {number: [100, 500]},
         topics: [event2]
     })
     .on("data", function(logs){
