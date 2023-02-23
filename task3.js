@@ -49,7 +49,7 @@ async function main() {
 
     myContract.events.Receive({
         filter: {sender: account2.address},
-        topics: [event1]
+        // topics: [event1]
     })
     .on("data", function(logs){
         console.log("EVENT START");
@@ -59,7 +59,7 @@ async function main() {
     
     myContract.events.SetData({
         filter: {number: [100, 500]},
-        topics: [event2]
+        // topics: [event2]
     })
     .on("data", function(logs){
         console.log("EVENT START");
