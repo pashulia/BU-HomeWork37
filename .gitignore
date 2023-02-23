@@ -1,4 +1,4 @@
 .vscode
 /node_modules
-/contracts/Example.abi
-/contracts/Example.bin
+Example.abi
+Example.bin
