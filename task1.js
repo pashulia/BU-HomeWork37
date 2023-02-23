@@ -1,6 +1,4 @@
 const Web3 = require('web3')
-const fs = require('fs');
-
 
 // let web3 = new Web3('wss://eth-goerli.g.alchemy.com/v2/XdE1v9zVDSoRe6S5013cteykw1ZDC0u9')
 let web3 = new Web3('ws://127.0.0.1:7545')
@@ -14,16 +12,20 @@ async function main() {
     let account2 = web3.eth.accounts.privateKeyToAccount(key2)
     console.log(account1);
     console.log(account2);
-    
-    console.log('\n\n\n --- Подписка на транзакции web3.eth.subscribe(pendingTransactions) --- \n')
 
-    let subscriptionTx = web3.eth.subscribe('pendingTransactions', function(error, result) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('callback: ', result);
+    console.log('\n\n\n --- Подписка на транзакции web3.eth.subscribe(pendingTransactions) --- \n')
+    
+    async function getAccTx(error, hash) {
+        let transaction = await web3.eth.getTransaction(hash)
+        if (transaction.from == account1.address || transaction.to == account1.address) {
+            console.log(hash);
         }
+    }
+
+    let subscriptionTx = web3.eth.subscribe('pendingTransactions', (error, hash) =>{
+        getAccTx(error, hash)
     })
+
     .on("connected", function(subscriptionId) {
         console.log('connected: ', subscriptionId);
     })
